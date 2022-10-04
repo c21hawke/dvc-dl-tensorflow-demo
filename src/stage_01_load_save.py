@@ -6,15 +6,15 @@ import shutil
 from tqdm import tqdm
 import logging
 
-logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(messages)s]"
+# logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(messages)s]"
 log_dir = "logs"
-create_directory([log_dir])
-logging.basicConfig(filename=os.path.join(log_dir, "runnig_logs.log"), level=logging.INFO,format=logging_str, filemode='a')
+os.makedirs(log_dir, exist_ok=True)
+logging.basicConfig(filename=os.path.join(log_dir, 'runnig_logs.log'), level=logging.INFO, filemode='a')
 
 def copy_file(source_download_dir,local_data_dir):
     list_of_files = os.listdir(source_download_dir)
     N = len(list_of_files)
-    for file in tqdm(list_of_files, total=N,desc="copyting file from {src_download_dir} to {local_data_dir}", colour="green"):
+    for file in tqdm(list_of_files, total=N,desc=f"copyting file from {source_download_dir} to {local_data_dir}", colour="green"):
         src = os.path.join(source_download_dir, file)
         dest = os.path.join(local_data_dir,file)
         shutil.copy(src,dest)
@@ -40,9 +40,9 @@ if __name__ == "__main__":
 
     parsed_args = args.parse_args()
     try:
-        logging.info("Stage one started")
+        logging.info(">>>>> Stage one started")
         get_data(config_path = parsed_args.config)
-        logging.info("stage ane completd all the data are saved in local")
+        logging.info("stage one completd all the data are saved in local >>>>>\n")
     except Exception as e:
         logging.exception(e)
         raise e
