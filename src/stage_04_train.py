@@ -1,4 +1,7 @@
+from venv import create
 from src.utils.all_utils import read_yaml,create_directory
+from src.utils.models import load_full_model
+from src.utils.callbacks import get_callbacks
 import argparse
 import os
 import logging
@@ -15,6 +18,17 @@ def train_model(config_path, params_path):
     artifacts = config["artifacts"]
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
 
+    train_model_dir = os.path.join(artifacts_dir, artifacts["TRAINED_MODEL_DIR"])
+
+    create_directory([train_model_dir])
+
+    untrained_full_model_path = os.path.join(artifacts_dir,artifacts["BASE_MODEL_DIR"], artifacts["UPDATED_BASE_MODEL_NAME"])
+
+    model = load_full_model(untrained_full_model_path)
+
+    callback_dir_path = os.path.join(artifacts_dir, artifacts["CALLBACKS_DIR"])
+
+    callbacks = get_callbacks(callback_dir_path)
     
 
 

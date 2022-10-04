@@ -45,3 +45,6 @@ def prepare_model(model, classes, freeze_all, freeze_till, learning_rate):
 
     return full_model
     
+def load_full_model(untrained_full_model_path):
+    model = tf.keras.models.load_model(untrained_full_model_path)
+    logging.info("Untrained model is read from : {untrained_full_model_path}")

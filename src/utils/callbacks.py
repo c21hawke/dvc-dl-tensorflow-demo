@@ -28,3 +28,15 @@ def create_and_save_checkpoint_callback(callbacks_dir, checkpoint_dir):
     logging.info(f"Tensorboard callback is being saved at {ckpt_callback_flepath}")
 
 
+def get_callbacks(callback_dir_path):
+    callback_path = [
+        os.path.join(callback_dir_path, bin_file) for bin_file in os.listdir(callback_dir_path) if bin_file.endswith(".cb")
+    ]
+
+    callbacks = [
+        joblib.load(path) for path in callback_path
+    ]
+
+    logging.info(f"saved callbacks are loaded from {callback_dir_path}")
+
+    return callbacks
