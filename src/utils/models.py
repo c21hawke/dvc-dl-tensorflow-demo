@@ -18,7 +18,7 @@ def prepare_model(model, classes, freeze_all, freeze_till, learning_rate):
         for layer in model.layers:
             layer.trainable = False
     
-    elif (freeze_till is not None) and (freeze_till > 1):
+    elif (freeze_till is not None) and (freeze_till > 0):
         for layer in model.layers[:-freeze_till]:
             layer.trainable = False
         
@@ -43,5 +43,5 @@ def prepare_model(model, classes, freeze_all, freeze_till, learning_rate):
 
     logging.info("Custom model is complied and ready to be trained")
 
-    return model
+    return full_model
     
