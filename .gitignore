@@ -137,3 +137,4 @@ research
 # ignore the secrets file
 config/secrets.yaml
 /data
+/artifacts/base_model
