@@ -2,6 +2,7 @@ import yaml
 import os
 import json
 import logging
+import time
 
 def read_yaml(path_to_yaml: str)-> dict:
     with open(path_to_yaml) as yaml_file:
